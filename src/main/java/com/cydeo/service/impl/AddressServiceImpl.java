@@ -23,7 +23,9 @@ public class AddressServiceImpl implements AddressService {
     private final MapperUtil mapperUtil;
     private final WeatherApiClient weatherApiClient;
 
-    public AddressServiceImpl(AddressRepository addressRepository, MapperUtil mapperUtil, WeatherApiClient weatherApiClient) {
+    public AddressServiceImpl(AddressRepository addressRepository,
+                              MapperUtil mapperUtil,
+                              WeatherApiClient weatherApiClient) {
         this.addressRepository = addressRepository;
         this.mapperUtil = mapperUtil;
         this.weatherApiClient = weatherApiClient;
@@ -50,7 +52,8 @@ public class AddressServiceImpl implements AddressService {
     }
 
     private Integer retrieveTemperatureByCity(String city) {
-     WeatherResponse weatherResponse = weatherApiClient.getCurrentWeather(accessKey,city);
+     WeatherResponse weatherResponse = weatherApiClient
+             .getCurrentWeather(accessKey,city);
 
          if(weatherResponse ==null || weatherResponse.getCurrent() ==null){
              return null;

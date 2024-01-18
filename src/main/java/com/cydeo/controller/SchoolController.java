@@ -64,11 +64,15 @@ public class SchoolController {
     @GetMapping("/parents")
     public ResponseEntity<ResponseWrapper> readAllParents(){
 
+//        ResponseWrapper responseWrapper= new ResponseWrapper(true,"parents are successfully retrieved.",
+//                HttpStatus.ACCEPTED.value(),parentService.findAll());
+
         return ResponseEntity
                             .status(HttpStatus.ACCEPTED)
                             .header("Parent","Returned")
                             .body(new ResponseWrapper(true,"parents are successfully retrieved.",
                                     HttpStatus.ACCEPTED.value(),parentService.findAll()));
+                    //        .body(ResponseWrapper);
     }
 
     /*  6MIN
@@ -85,7 +89,8 @@ public class SchoolController {
         //find the address to return
         AddressDTO addressDTO = addressService.findById(id);
 
-        return ResponseEntity.ok(new ResponseWrapper("Address "+id+" is successfully retrieved",addressDTO));
+        return ResponseEntity.ok(new ResponseWrapper("Address "+id+
+                        " is successfully retrieved",addressDTO));
 
     }
 
@@ -95,7 +100,10 @@ public class SchoolController {
         return updated address directly.
      */
     @PutMapping("/address/{id}")
-    public AddressDTO updateAddress(@PathVariable("id") Long id, @RequestBody AddressDTO addressDTO) throws Exception {
+    public AddressDTO updateAddress(@PathVariable("id") Long id,
+                                    @RequestBody AddressDTO addressDTO)
+            throws Exception {
+
         addressDTO.setId(id);
 
         AddressDTO updateAddress = addressService.update(addressDTO);
@@ -111,14 +119,17 @@ public class SchoolController {
      */
 
     @PostMapping("/teachers")
-    public ResponseEntity<ResponseWrapper> createTeacher(@Valid @RequestBody TeacherDTO teacherDTO){
+    public ResponseEntity<ResponseWrapper>
+    createTeacher(@Valid @RequestBody TeacherDTO teacherDTO){
         TeacherDTO teacher = teacherService.createTeacher(teacherDTO);
 
-        ResponseWrapper responseWrapper = new ResponseWrapper(true,"Teacher is created."
+        ResponseWrapper responseWrapper = new ResponseWrapper(
+                true,"Teacher is created."
                 ,HttpStatus.CREATED.value(),teacher);
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .header("teacherId",String.valueOf(teacher.getId()))
+                .header("teacherId",String
+                        .valueOf(teacher.getId()))
                 .body(responseWrapper);
 
     }

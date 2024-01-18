@@ -39,8 +39,12 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public TeacherDTO createTeacher(TeacherDTO teacherDTO) {
-        Teacher newTeacher = teacherRepository.save(mapperUtil.convert(teacherDTO, new Teacher()));
-        return mapperUtil.convert(newTeacher,new TeacherDTO());
+        Teacher newTeacher = teacherRepository
+                .save(mapperUtil
+                        .convert(teacherDTO, new Teacher()));
+
+        return mapperUtil
+                .convert(newTeacher,new TeacherDTO());
     }
 
 }

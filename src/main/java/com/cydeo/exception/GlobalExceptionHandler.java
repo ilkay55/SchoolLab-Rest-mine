@@ -17,7 +17,8 @@ import java.util.List;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ExceptionWrapper> handleNotFoundException(NotFoundException ex, HttpServletRequest request){
+    public ResponseEntity<ExceptionWrapper> handleNotFoundException(
+            NotFoundException ex, HttpServletRequest request){
         //create a json with ExceptionWrapper and return body with 404 status code
         ExceptionWrapper exceptionWrapper = new ExceptionWrapper();
         exceptionWrapper.setTimestamp(LocalDateTime.now());
